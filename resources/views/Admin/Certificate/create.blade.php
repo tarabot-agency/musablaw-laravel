@@ -50,7 +50,7 @@
                                                     <div class="form-group">
                                                         <label>{{ __('app.image') }}</label>
                                                         <input type="file" class="form-control"
-                                                            placeholder="{{ __('app.image') }}" name="image" required>
+                                                            placeholder="{{ __('app.image') }}" name="image">
                                                     </div>
                                                 </div>
                                             </div>

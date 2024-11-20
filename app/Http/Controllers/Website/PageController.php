@@ -52,22 +52,6 @@ class PageController extends Controller
                     return $page;
                 });
 
-
-            $content['our_projects'] = Project::with('images:id,project_id,image')->select(
-                'id',
-                'name_' . $lang . ' as name',
-            )
-                ->take(3)
-                ->get()
-                ->map(function ($project) {
-                    $project->images = $project->images->map(function ($image) {
-                        $image->image = asset('images/projects/' . $image->image);
-                        return $image;
-                    });
-                    return $project;
-                });
-
-
             $content['our_partners'] = Partener::get()->map(function ($partener) {
                 $image = asset('images/parteners/' . $partener->image);
                 return [

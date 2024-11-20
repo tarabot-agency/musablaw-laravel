@@ -39,16 +39,6 @@
                             <span class="menu-title text-truncate" data-i18n="Email">{{ __('app.about_us') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('*/manager_word') ? 'active' : '' }}">
-                        <a href="{{ route('page.show', 'manager_word') }}">
-                            <span class="menu-title text-truncate">{{ __('app.manager_word') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ Request::is('*/our_story') ? 'active' : '' }}">
-                        <a href="{{ route('page.show', 'our_story') }}">
-                            <span class="menu-title text-truncate">{{ __('app.our_story') }}</span>
-                        </a>
-                    </li>
 
                     <li class="nav-item {{ Request::is('*/our_mission') ? 'active' : '' }}">
                         <a href="{{ route('page.show', 'our_mission') }}">
@@ -62,30 +52,10 @@
                         </a>
                     </li>
 
-                    <li class="nav-item {{ Request::is('*/our_values') ? 'active' : '' }}">
-                        <a href="{{ route('page.show', 'our_values') }}">
-                            <span class="menu-title text-truncate">{{ __('app.our_values') }}</span>
-                        </a>
-                    </li>
-
 
                     <li class="nav-item {{ Request::is('*/our_targets') ? 'active' : '' }}">
                         <a href="{{ route('page.show', 'our_targets') }}">
                             <span class="menu-title text-truncate">{{ __('app.our_targets') }}</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item {{ Request::is('*/quality_policy') ? 'active' : '' }}">
-                        <a href="{{ route('page.show', 'quality_policy') }}">
-                            <span class="menu-title text-truncate">{{ __('app.quality_policy') }}</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item {{ Request::is('*/security_policy') ? 'active' : '' }}">
-                        <a href="{{ route('page.show', 'security_policy') }}">
-                            <span class="menu-title text-truncate">{{ __('app.security_policy') }}</span>
                         </a>
                     </li>
 
@@ -104,12 +74,12 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ Request::is('*project*') ? 'active' : '' }}">
+            {{-- <li class="nav-item {{ Request::is('*project*') ? 'active' : '' }}">
                 <a href="{{ route('projects.index') }}">
                     <i class='bx bx-buildings'></i>
                     <span class="menu-title text-truncate" data-i18n="Email">{{ __('app.our_projects') }}</span>
                 </a>
-            </li>
+            </li> --}}
 
 
             <li class="nav-item {{ Request::is('*partener*') ? 'active' : '' }}">

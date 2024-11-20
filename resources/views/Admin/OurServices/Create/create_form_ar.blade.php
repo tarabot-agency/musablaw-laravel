@@ -12,7 +12,9 @@
             <a href="https://icons.getbootstrap.com" target="__blank">
                 {{ __('app.link') }}</a>
             <input type="text" class="form-control" placeholder='Icon Class From Link Above Like ( bi bi-alarm )'
-                value="{{ old('icon') }}" name="icon" required>
+                {{-- value="{{ old('icon') }}" --}}
+                value="bi bi-alarm"
+                 name="icon" required>
         </div>
     </div>
     <div class="col-md-4">

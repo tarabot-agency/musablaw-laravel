@@ -37,15 +37,15 @@ class CertificateController extends Controller
     {
         try {
             DB::beginTransaction();
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'image' => 'required|mimes:png,jpg,jpeg',
-            ]);
-            if ($validator->fails()) {
-                Session::flash('message',  $validator->errors()->first());
-                Session::flash('alert-class', 'alert-danger');
-                return redirect()->back()->withInput();
-            }
+            // $validator = Validator::make($request->all(), [
+            //     'name' => 'required',
+            //     'image' => 'required|mimes:png,jpg,jpeg',
+            // ]);
+            // if ($validator->fails()) {
+            //     Session::flash('message',  $validator->errors()->first());
+            //     Session::flash('alert-class', 'alert-danger');
+            //     return redirect()->back()->withInput();
+            // }
             $certificate = new Certificate();
             $certificate->name = $request->name;
             $photo = $this->saveImage($request->image, 'certificates');
