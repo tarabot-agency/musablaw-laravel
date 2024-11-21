@@ -81,16 +81,15 @@ class PageController extends Controller
                 ->first();
             $content['our_vision']->image = asset('images/pages/' . $content['our_vision']->image);
 
-
-            $content['our_values'] = Page::select(
+            $content['our_targets'] = Page::select(
                 'id',
                 'title_' . $lang . ' as title',
                 'description_' . $lang . ' as description',
                 'image'
             )
-                ->where('key', 'our_values')
+                ->where('key', 'our_targets')
                 ->first();
-            $content['our_values']->image = asset('images/pages/' . $content['our_values']->image);
+            $content['our_targets']->image = asset('images/pages/' . $content['our_targets']->image);
 
             $content['static_slider_image'] = asset('images/settings/'. Setting('static_slider_' . $lang));
             return $this->returnData('data', $content);
