@@ -187,15 +187,15 @@ class PageController extends Controller
             if (!$page)
                 return $this->returnError('404', 'page not found');
 
-            $image_path_folder = 'page';
-            if (Route::currentRouteName() == 'article.show' && $page->section == 'article') {
-                $image_path_folder = 'articles';
-            }
-
             if (Route::currentRouteName() == 'service.show' && $page->section != 'our_services') {
                 return $this->returnError('404', 'page not found');
             } elseif (Route::currentRouteName() == 'article.show' && $page->section != 'article') {
                 return $this->returnError('404', 'page not found');
+            }
+
+            $image_path_folder = 'page';
+            if (Route::currentRouteName() == 'article.show' && $page->section == 'article') {
+                $image_path_folder = 'articles';
             }
             $page->image = $page->image ? asset('images/' . $image_path_folder . '/' . $page->image) : '';
             return $this->returnData('data', $page);
