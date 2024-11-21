@@ -19,3 +19,4 @@ Route::get('page/about-us', [PageController::class, 'AboutUs']);
 Route::get('page/our-services', [PageController::class, 'ourServices']);
 Route::get('page/our-services/{id}', [PageController::class, 'showPage'])->name('service.show');
 Route::get('page/our-projects', [PageController::class, 'ourProjects']);
+Route::get('page/our-partners', [PageController::class, 'ourPartners']);

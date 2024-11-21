@@ -220,4 +220,17 @@ class PageController extends Controller
             return $this->returnError($e->getCode(), $e->getMessage());
         }
     }
+
+    public function ourPartners(Request $request){
+        try {
+            $lang = $request->header('lang');
+            $partners = Partener::select('id', 'name', 'image')->get()->map(function ($partner) {
+                $partner->image = asset('images/partners/' . $partner->image);
+                return $partner;
+            });
+            return $this->returnData('data', $partners);
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
+        }
+    }
 }
