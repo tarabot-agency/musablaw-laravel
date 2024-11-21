@@ -193,7 +193,7 @@ class PageController extends Controller
                 return $this->returnError('404', 'page not found');
             }
 
-            $image_path_folder = 'page';
+            $image_path_folder = 'pages';
             if (Route::currentRouteName() == 'article.show' && $page->section == 'article') {
                 $image_path_folder = 'articles';
             }
