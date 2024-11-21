@@ -53,7 +53,7 @@ class PageController extends Controller
                 });
 
             $content['our_partners'] = Partener::get()->map(function ($partener) {
-                $image = asset('images/parteners/' . $partener->image);
+                $image =  $partener->image ? asset('images/parteners/' . $partener->image) : null;
                 return [
                     'id' => $partener->id,
                     'image' => $image,
@@ -130,10 +130,11 @@ class PageController extends Controller
                     return $page;
                 });
             $content['certificates'] =  Certificate::get()->map(function ($certificate) {
-                $image = asset('images/certificates/' . $certificate->image);
+                $image = $certificate->image ? asset('images/certificates/' . $certificate->image): null;
                 return [
                     'id' => $certificate->id,
                     'image' => $image,
+                    'name' => $certificate->name,
                 ];
             });
             return $this->returnData('data', $content);
