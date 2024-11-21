@@ -92,7 +92,7 @@ class PageController extends Controller
                 ->first();
             $content['our_targets']->image = asset('images/pages/' . $content['our_targets']->image);
 
-            $content['static_slider_image'] = asset('images/settings/'. Setting('static_slider_' . $lang));
+            $content['static_slider_image'] = asset('images/settings/' . Setting('static_slider_' . $lang));
             return $this->returnData('data', $content);
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
@@ -130,7 +130,7 @@ class PageController extends Controller
                     return $page;
                 });
             $content['certificates'] =  Certificate::get()->map(function ($certificate) {
-                $image = $certificate->image ? asset('images/certificates/' . $certificate->image): null;
+                $image = $certificate->image ? asset('images/certificates/' . $certificate->image) : null;
                 return [
                     'id' => $certificate->id,
                     'image' => $image,
@@ -187,10 +187,17 @@ class PageController extends Controller
             if (!$page)
                 return $this->returnError('404', 'page not found');
 
+            $image_path_folder = 'page';
+            if (Route::currentRouteName() == 'article.show' && $page->section == 'article') {
+                $image_path_folder = 'articles';
+            }
+
             if (Route::currentRouteName() == 'service.show' && $page->section != 'our_services') {
                 return $this->returnError('404', 'page not found');
+            } elseif (Route::currentRouteName() == 'article.show' && $page->section != 'article') {
+                return $this->returnError('404', 'page not found');
             }
-            $page->image = $page->image ? asset('images/pages/' . $page->image) : '';
+            $page->image = $page->image ? asset('images/' . $image_path_folder . '/' . $page->image) : '';
             return $this->returnData('data', $page);
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
@@ -221,7 +228,8 @@ class PageController extends Controller
         }
     }
 
-    public function ourPartners(Request $request){
+    public function ourPartners(Request $request)
+    {
         try {
             $lang = $request->header('lang');
             $partners = Partener::select('id', 'name', 'image')->get()->map(function ($partner) {
@@ -229,6 +237,24 @@ class PageController extends Controller
                 return $partner;
             });
             return $this->returnData('data', $partners);
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
+        }
+    }
+
+    public function ourArticles()
+    {
+        try {
+            $lang = request()->header('lang');
+            if (!$lang || ($lang != 'en' && $lang != 'ar'))
+                return $this->returnError('400', 'lang is required');
+            $articles = Page::where('section', 'article')
+                ->select('id', 'title_' . $lang . ' as title', 'image')
+                ->get()->map(function ($article) {
+                    $article->image = asset('images/articles/' . $article->image);
+                    return $article;
+                });
+            return $this->returnData('data', $articles);
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
         }
