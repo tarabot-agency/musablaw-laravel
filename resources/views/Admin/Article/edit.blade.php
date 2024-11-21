@@ -154,9 +154,12 @@
         // Counter to keep track of dynamically added sections
         let sectionCounter = parseInt('{{ count($article->subPages) }}');
         let website_lang = "{{ $website_lang }}";
-        let new_setion_template = '';
-        if (website_lang == 'ar') {
-            new_setion_template = `
+
+        // Function to add new section with input fields
+        function addInputField() {
+            let new_setion_template = '';
+            if (website_lang == 'ar') {
+                new_setion_template = `
         <div class="input-container">
           <div class="row mb-3">
             <div class="col-md-12">
@@ -172,8 +175,8 @@
           </div>
             <hr>
         </div>`;
-        } else if (website_lang == 'en') {
-            new_setion_template = ` <div class="input-container">
+            } else if (website_lang == 'en') {
+                new_setion_template = ` <div class="input-container">
           <div class="row mb-3">
             <div class="col-md-12">
               <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
@@ -188,8 +191,8 @@
           </div>
             <hr>
         </div>`;
-        } else {
-            new_setion_template = `
+            } else {
+                new_setion_template = `
         <div class="input-container">
           <div class="row mb-3">
             <div class="col-md-6">
@@ -210,11 +213,8 @@
             <hr>
         </div>
       `;
-        }
-        // Function to add new section with input fields
-        function addInputField() {
-            var newSection = new_setion_template;
-            $('#input-fields-container').append(newSection);
+            }
+            $('#input-fields-container').append(new_setion_template);
             sectionCounter++;
         }
 

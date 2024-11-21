@@ -57,6 +57,7 @@ class PageController extends Controller
                 return [
                     'id' => $partener->id,
                     'image' => $image,
+                    'name' => $partener->name,
                 ];
             });
 
