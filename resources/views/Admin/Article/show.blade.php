@@ -71,21 +71,27 @@
                                             </aside>
                                             <main class="col-lg-6">
                                                 <div class="ps-lg-3 p-2">
-
+                                                    @php
+                                                        $website_language = Setting('website_language');
+                                                    @endphp
                                                     <div class="row">
-                                                        @if ($article->title_en)
+                                                        @if ($website_language == 'en')
+                                                            <dt class="col-4">{{ __('app.title') }}:</dt>
+                                                            <dd class="col-8">{{ $article->title_en ?? '---' }}</dd>
+                                                            <dt class="col-4">{{ __('app.description') }}:</dt>
+                                                            <dd class="col-8">{{ $article->description_en ?? '---' }}</dd>
+                                                        @elseif ($website_language == 'ar')
+                                                            <dt class="col-4">{{ __('app.title') }}:</dt>
+                                                            <dd class="col-8">{{ $article->title_ar ?? '---' }}</dd>
+                                                            <dt class="col-4">{{ __('app.description') }}:</dt>
+                                                            <dd class="col-8">{{ $article->description_ar ?? '---' }}</dd>
+                                                        @else
                                                             <dt class="col-4">{{ __('app.title_en') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_en ?? '---' }}</dd>
-                                                        @endif
-                                                        @if ($article->title_ar)
                                                             <dt class="col-4">{{ __('app.title_ar') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_ar ?? '---' }}</dd>
-                                                        @endif
-                                                        @if ($article->description_en)
                                                             <dt class="col-4">{{ __('app.description_en') }}:</dt>
                                                             <dd class="col-8">{{ $article->description_en ?? '---' }}</dd>
-                                                        @endif
-                                                        @if ($article->description_ar)
                                                             <dt class="col-4">{{ __('app.description_ar') }}:</dt>
                                                             <dd class="col-8">{{ $article->description_ar ?? '---' }}</dd>
                                                         @endif
@@ -97,9 +103,6 @@
                                         <div class="row">
 
                                             @if (count($article->subPages) > 0)
-                                                @php
-                                                    $website_language = Setting('website_language');
-                                                @endphp
                                                 <h6>{{ __('app.sub_sections') }}</h6>
                                                 <div class="table-responsive">
                                                     <table class="table mb-0 text-center">

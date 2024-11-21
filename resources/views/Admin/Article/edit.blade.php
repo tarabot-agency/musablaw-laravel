@@ -86,16 +86,16 @@
                                                         @if ($website_lang == 'ar')
                                                             <div class="col-md-12">
                                                                 <label for="content_ar_{{ $index }}"
-                                                                    class="form-label">{{ __('app.content_ar') }}</label>
+                                                                    class="form-label">{{ __('app.content') }}</label>
                                                                 <textarea class="form-control" id="content_ar_{{ $index }}" name="supSections[{{ $index }}][content_ar]"
-                                                                    rows="3" placeholder="{{ __('app.content_ar') }}">{{ $subPage->content_ar }}</textarea>
+                                                                    rows="3" placeholder="{{ __('app.content_') }}">{{ $subPage->content_ar }}</textarea>
                                                             </div>
                                                         @elseif ($website_lang == 'en')
                                                             <div class="col-md-12">
                                                                 <label for="content_en_{{ $index }}"
-                                                                    class="form-label">{{ __('app.content_en') }}</label>
+                                                                    class="form-label">{{ __('app.content') }}</label>
                                                                 <textarea class="form-control" id="content_en_{{ $index }}" name="supSections[{{ $index }}][content_en]"
-                                                                    rows="3" placeholder="{{ __('app.content_en') }}">{{ $subPage->content_en }}</textarea>
+                                                                    rows="3" placeholder="{{ __('app.content') }}">{{ $subPage->content_en }}</textarea>
                                                             </div>
                                                         @elseif ($website_lang == 'both')
                                                             <div class="col-md-6">

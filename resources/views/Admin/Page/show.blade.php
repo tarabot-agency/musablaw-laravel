@@ -67,15 +67,15 @@
                                                     @endphp
                                                     <div class="row">
                                                         @if ($website_language == 'en')
-                                                            <dt class="col-4">{{ __('app.title_en') }}:</dt>
+                                                            <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $page->title_en ?? '---' }}</dd>
-                                                            <dt class="col-4">{{ __('app.description_en') }}:</dt>
+                                                            <dt class="col-4">{{ __('app.description') }}:</dt>
                                                             <dd class="col-8">{{ $page->description_en ?? '---' }}</dd>
                                                         @elseif($website_language == 'ar')
-                                                            <dt class="col-4">{{ __('app.title_ar') }}:</dt>
+                                                            <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $page->title_ar ?? '---' }}</dd>
 
-                                                            <dt class="col-4">{{ __('app.description_ar') }}:</dt>
+                                                            <dt class="col-4">{{ __('app.description') }}:</dt>
                                                             <dd class="col-8">{{ $page->description_ar ?? '---' }}</dd>
                                                         @else
                                                             <dt class="col-4">{{ __('app.title_en') }}:</dt>
@@ -105,16 +105,26 @@
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th>{{ __('app.number') }}</th>
-                                                                <th>{{ __('app.content_en') }}</th>
-                                                                <th>{{ __('app.content_ar') }}</th>
+                                                                @if ($website_language == 'en' || $website_language == 'ar')
+                                                                    <th>{{ __('app.content') }}</th>
+                                                                @else
+                                                                    <th>{{ __('app.content_en') }}</th>
+                                                                    <th>{{ __('app.content_ar') }}</th>
+                                                                    @endif
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($page->subPages as $subpage)
                                                                 <tr>
                                                                     <td>{{ $loop->iteration }}</td>
-                                                                    <td>{{ $subpage->content_en ?? '---' }}</td>
-                                                                    <td>{{ $subpage->content_ar ?? '---' }}</td>
+                                                                    @if ($website_language == 'en')
+                                                                        <td>{{ $subpage->content_en ?? '---' }}</td>
+                                                                    @elseif($website_language == 'ar')
+                                                                        <td>{{ $subpage->content_ar ?? '---' }}</td>
+                                                                    @else
+                                                                        <td>{{ $subpage->content_en ?? '---' }}</td>
+                                                                        <td>{{ $subpage->content_ar ?? '---' }}</td>
+                                                                    @endif
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

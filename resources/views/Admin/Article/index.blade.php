@@ -57,9 +57,9 @@
                                                 <tr>
                                                     <th>{{ __('app.number') }}</th>
                                                     @if ($website_lang == 'ar')
-                                                        <th>{{ __('app.title_ar') }}</th>
+                                                        <th>{{ __('app.title') }}</th>
                                                     @elseif ($website_lang == 'en')
-                                                        <th>{{ __('app.title_en') }}</th>
+                                                        <th>{{ __('app.title') }}</th>
                                                     @else
                                                         <th>{{ __('app.title_en') }}</th>
                                                         <th>{{ __('app.title_ar') }}</th>
