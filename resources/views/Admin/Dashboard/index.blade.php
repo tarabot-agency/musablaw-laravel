@@ -98,9 +98,9 @@
             </div>
             <div class="content-body mt-2">
                 <div class="cardContainer">
-                    <a class="card" href="{{ route('projects.index') }}">
+                    <a class="card" href="{{ route('our-services.index') }}">
                         <div>  <i class='bx bx-buildings'></i>
-                            <div><strong>{{ $projects_count }}</strong> <span>{{ __('app.projects') }}</span></div>
+                            <div><strong>{{ $our_services_count }}</strong> <span>{{ __('app.our_services') }}</span></div>
                         </div>
                     </a>
                     <a class="card" href="{{ route('articles.index') }}">
