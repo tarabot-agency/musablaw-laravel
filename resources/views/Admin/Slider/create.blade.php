@@ -36,22 +36,16 @@
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('app.image_en') }}</label>
-                                                        <input type="file" class="form-control"
-                                                            placeholder="{{ __('app.image_en') }}" name="image_en" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('app.image_ar') }}</label>
-                                                        <input type="file" class="form-control"
-                                                            placeholder="{{ __('app.image_ar') }}" name="image_ar"
-                                                            required>
-                                                    </div>
-                                                </div>
+                                                @php
+                                                    $website_language = Setting('website_language');
+                                                @endphp
+                                                @if ($website_language == 'ar')
+                                                    @include('Admin.Slider.Create.create_ar')
+                                                @elseif($website_language == 'en')
+                                                    @include('Admin.Slider.Create.create_en')
+                                                @else
+                                                    @include('Admin.Slider.Create.create_both')
+                                                @endif
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 d-flex justify-content-end mt-1">

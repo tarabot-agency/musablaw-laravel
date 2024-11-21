@@ -56,26 +56,40 @@
                                                 <div class="border-right rounded-4 mb-3 justify-content-center">
                                                     <div class="col-md-12">
                                                         <img src="{{ asset('images/pages/' . $page->image) }}"
-                                                            class="img-fluid" alt="Image 1"
-                                                            width="50%">
+                                                            class="img-fluid" alt="Image 1" width="50%">
                                                     </div>
                                                 </div>
                                             </aside>
                                             <main class="col-lg-6">
                                                 <div class="ps-lg-3 p-2">
-
+                                                    @php
+                                                        $website_language = Setting('website_language');
+                                                    @endphp
                                                     <div class="row">
-                                                        <dt class="col-4">{{ __('app.title_en') }}:</dt>
-                                                        <dd class="col-8">{{ $page->title_en ?? '---' }}</dd>
-                                                        <dt class="col-4">{{ __('app.title_ar') }}:</dt>
-                                                        <dd class="col-8">{{ $page->title_ar ?? '---' }}</dd>
-                                                        <dt class="col-4">{{ __('app.description_en') }}:</dt>
-                                                        <dd class="col-8">{{ $page->description_en ?? '---' }}</dd>
-                                                        <dt class="col-4">{{ __('app.description_ar') }}:</dt>
-                                                        <dd class="col-8">{{ $page->description_ar ?? '---' }}</dd>
-                                                        @if($page->icon)
-                                                        <dt class="col-4">{{ __('app.icon') }}:</dt>
-                                                        <dd class="col-8">{{ $page->icon }}</dd>
+                                                        @if ($website_language == 'en')
+                                                            <dt class="col-4">{{ __('app.title_en') }}:</dt>
+                                                            <dd class="col-8">{{ $page->title_en ?? '---' }}</dd>
+                                                            <dt class="col-4">{{ __('app.description_en') }}:</dt>
+                                                            <dd class="col-8">{{ $page->description_en ?? '---' }}</dd>
+                                                        @elseif($website_language == 'ar')
+                                                            <dt class="col-4">{{ __('app.title_ar') }}:</dt>
+                                                            <dd class="col-8">{{ $page->title_ar ?? '---' }}</dd>
+
+                                                            <dt class="col-4">{{ __('app.description_ar') }}:</dt>
+                                                            <dd class="col-8">{{ $page->description_ar ?? '---' }}</dd>
+                                                        @else
+                                                            <dt class="col-4">{{ __('app.title_en') }}:</dt>
+                                                            <dd class="col-8">{{ $page->title_en ?? '---' }}</dd>
+                                                            <dt class="col-4">{{ __('app.title_ar') }}:</dt>
+                                                            <dd class="col-8">{{ $page->title_ar ?? '---' }}</dd>
+                                                            <dt class="col-4">{{ __('app.description_en') }}:</dt>
+                                                            <dd class="col-8">{{ $page->description_en ?? '---' }}</dd>
+                                                            <dt class="col-4">{{ __('app.description_ar') }}:</dt>
+                                                            <dd class="col-8">{{ $page->description_ar ?? '---' }}</dd>
+                                                        @endif
+                                                        @if ($page->icon)
+                                                            <dt class="col-4">{{ __('app.icon') }}:</dt>
+                                                            <dd class="col-8">{{ $page->icon }}</dd>
                                                         @endif
                                                     </div>
                                                     <hr />
@@ -84,29 +98,29 @@
                                         </div>
                                         <div class="row">
 
-                                                @if (count($page->subPages) > 0)
-                                                    <h6>{{ __('app.sub_sections') }}</h6>
-                                                    <div class="table-responsive">
-                                                        <table class="table mb-0 text-center">
-                                                            <thead class="thead-dark">
+                                            @if (count($page->subPages) > 0)
+                                                <h6>{{ __('app.sub_sections') }}</h6>
+                                                <div class="table-responsive">
+                                                    <table class="table mb-0 text-center">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>{{ __('app.number') }}</th>
+                                                                <th>{{ __('app.content_en') }}</th>
+                                                                <th>{{ __('app.content_ar') }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($page->subPages as $subpage)
                                                                 <tr>
-                                                                    <th>{{ __('app.number') }}</th>
-                                                                    <th>{{ __('app.content_en') }}</th>
-                                                                    <th>{{ __('app.content_ar') }}</th>
+                                                                    <td>{{ $loop->iteration }}</td>
+                                                                    <td>{{ $subpage->content_en ?? '---' }}</td>
+                                                                    <td>{{ $subpage->content_ar ?? '---' }}</td>
                                                                 </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($page->subPages as $subpage)
-                                                                    <tr>
-                                                                        <td>{{ $loop->iteration }}</td>
-                                                                        <td>{{ $subpage->content_en ?? '---' }}</td>
-                                                                        <td>{{ $subpage->content_ar ?? '---' }}</td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
 
                                         </div>
                                     </div>

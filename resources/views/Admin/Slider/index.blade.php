@@ -48,13 +48,22 @@
                                 </div>
                                 <!-- table head dark -->
                                 @if (count($sliders) > 0)
+                                    @php
+                                        $website_language = Setting('website_language');
+                                    @endphp
                                     <div class="table-responsive">
                                         <table class="table mb-0 text-center">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th>{{ __('app.number') }}</th>
-                                                    <th>{{ __('app.image_en') }}</th>
-                                                    <th>{{ __('app.image_ar') }}</th>
+                                                    @if ($website_language == 'ar')
+                                                        <th>{{ __('app.image') }}</th>
+                                                    @elseif ($website_language == 'en')
+                                                        <th>{{ __('app.image') }}</th>
+                                                    @else
+                                                        <th>{{ __('app.image_en') }}</th>
+                                                        <th>{{ __('app.image_ar') }}</th>
+                                                    @endif
                                                     <th>{{ __('app.actions') }}</th>
                                                 </tr>
                                             </thead>
@@ -62,22 +71,42 @@
                                                 @foreach ($sliders as $slider)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td class="text-bold-500">
-                                                            @if ($slider->image_en)
-                                                                <img src="{{ asset('images/sliders/' . $slider->image_en) }}"
-                                                                    width="50" />
-                                                            @else
-                                                                ---
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-bold-500">
-                                                            @if ($slider->image_ar)
-                                                                <img src="{{ asset('images/sliders/' . $slider->image_ar) }}"
-                                                                    width="50" />
-                                                            @else
-                                                                ---
-                                                            @endif
-                                                        </td>
+                                                        @if ($website_language == 'en')
+                                                            <td class="text-bold-500">
+                                                                @if ($slider->image_en)
+                                                                    <img src="{{ asset('images/sliders/' . $slider->image_en) }}"
+                                                                        width="50" />
+                                                                @else
+                                                                    ---
+                                                                @endif
+                                                            </td>
+                                                        @elseif ($website_language == 'ar')
+                                                            <td class="text-bold-500">
+                                                                @if ($slider->image_ar)
+                                                                    <img src="{{ asset('images/sliders/' . $slider->image_ar) }}"
+                                                                        width="50" />
+                                                                @else
+                                                                    ---
+                                                                @endif
+                                                            </td>
+                                                        @else
+                                                            <td class="text-bold-500">
+                                                                @if ($slider->image_en)
+                                                                    <img src="{{ asset('images/sliders/' . $slider->image_en) }}"
+                                                                        width="50" />
+                                                                @else
+                                                                    ---
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-bold-500">
+                                                                @if ($slider->image_ar)
+                                                                    <img src="{{ asset('images/sliders/' . $slider->image_ar) }}"
+                                                                        width="50" />
+                                                                @else
+                                                                    ---
+                                                                @endif
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             <form id="deleteForm{{ $slider->id }}"
                                                                 style="display: inline"

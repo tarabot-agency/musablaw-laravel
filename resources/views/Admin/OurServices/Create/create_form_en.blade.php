@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <label>{{ __('app.title_en') }}</label>
-            <input type="text" class="form-control" placeholder="{{ __('app.title_en') }}" value="{{ old('title_en') }}"
+            <label>{{ __('app.title_') }}</label>
+            <input type="text" class="form-control" placeholder="{{ __('app.title') }}" value="{{ old('title_en') }}"
                 name="title_en" required>
         </div>
     </div>
@@ -24,8 +24,8 @@
     </div>
     <div class="col-md-12">
         <div class="form-group">
-            <label>{{ __('app.description_en') }}</label>
-            <textarea rows="5" class="form-control" placeholder="{{ __('app.description_en') }}" name="description_en">{{ old('description_en') }}</textarea>
+            <label>{{ __('app.description') }}</label>
+            <textarea rows="5" class="form-control" placeholder="{{ __('app.description') }}" name="description_en">{{ old('description_en') }}</textarea>
         </div>
     </div>
 </div>

@@ -158,8 +158,8 @@
         <div class="input-container">
           <div class="row mb-3">
             <div class="col-md-12">
-              <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content_ar') }}</label>
-              <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content_ar') }}"></textarea>
+              <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
+              <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
             </div>
           </div>
 
@@ -174,8 +174,8 @@
             new_setion_template = ` <div class="input-container">
           <div class="row mb-3">
             <div class="col-md-12">
-              <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content_en') }}</label>
-              <textarea class="form-control" id="content_en_${sectionCounter}" name="supSections[${sectionCounter}][content_en]" rows="3" placeholder="{{ __('app.content_en') }}"></textarea>
+              <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
+              <textarea class="form-control" id="content_en_${sectionCounter}" name="supSections[${sectionCounter}][content_en]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
             </div>
           </div>
 

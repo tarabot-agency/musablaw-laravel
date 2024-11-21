@@ -36,16 +36,28 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         try {
-            DB::beginTransaction();
-            $validator = Validator::make($request->all(), [
-                'image_en' => 'required|mimes:png,jpg,jpeg',
-                'image_ar' => 'required|mimes:png,jpg,jpeg',
-            ]);
+            $website_language = Setting('website_language');
+            if ($website_language == 'ar') {
+                $validator = Validator::make($request->all(), [
+                    'image_ar' => 'required|mimes:png,jpg,jpeg',
+                ]);
+            } elseif ($website_language == 'en') {
+                $validator = Validator::make($request->all(), [
+                    'image_en' => 'required|mimes:png,jpg,jpeg',
+                ]);
+            } else {
+                $validator = Validator::make($request->all(), [
+                    'image_en' => 'required|mimes:png,jpg,jpeg',
+                    'image_ar' => 'required|mimes:png,jpg,jpeg',
+                ]);
+            }
+
             if ($validator->fails()) {
                 Session::flash('message',  $validator->errors()->first());
                 Session::flash('alert-class', 'alert-danger');
                 return redirect()->back()->withInput();
             }
+            DB::beginTransaction();
             $slider = new Slider();
             $image_en = $this->saveImage($request->image_en, 'sliders');
             $image_ar = $this->saveImage($request->image_ar, 'sliders');
