@@ -98,6 +98,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{ asset('assets2/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets2/ckeditor/style.js') }}"></script>
     <script>
         // Counter to keep track of dynamically added sections
         let sectionCounter = 0;

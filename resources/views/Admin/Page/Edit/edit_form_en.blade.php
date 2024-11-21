@@ -12,10 +12,10 @@
             <input type="file" class="form-control" placeholder="{{ __('app.image') }}" name="image">
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             <label>{{ __('app.description') }}</label>
-            <textarea rows="5" class="form-control" placeholder="{{ __('app.description') }}" name="description_en">{{ $page->description_en }}</textarea>
+            <textarea rows="5" class="form-control {{ $page->section != "about_us" ? "ckeditor" : "" }}" placeholder="{{ __('app.description') }}" name="description_en">{{ $page->description_en }}</textarea>
         </div>
     </div>
     @if ($page->icon)

@@ -70,22 +70,22 @@
                                                             <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $page->title_en ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.description') }}:</dt>
-                                                            <dd class="col-8">{{ $page->description_en ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $page->description_en ?? '---' !!}</dd>
                                                         @elseif($website_language == 'ar')
                                                             <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $page->title_ar ?? '---' }}</dd>
 
                                                             <dt class="col-4">{{ __('app.description') }}:</dt>
-                                                            <dd class="col-8">{{ $page->description_ar ?? '---' }}</dd>
+                                                            <dd class="col-8">{!!$page->description_ar ?? '---' !!}</dd>
                                                         @else
                                                             <dt class="col-4">{{ __('app.title_en') }}:</dt>
                                                             <dd class="col-8">{{ $page->title_en ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.title_ar') }}:</dt>
                                                             <dd class="col-8">{{ $page->title_ar ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.description_en') }}:</dt>
-                                                            <dd class="col-8">{{ $page->description_en ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $page->description_en ?? '---' !!}</dd>
                                                             <dt class="col-4">{{ __('app.description_ar') }}:</dt>
-                                                            <dd class="col-8">{{ $page->description_ar ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $page->description_ar ?? '---' !!}</dd>
                                                         @endif
                                                         @if ($page->icon)
                                                             <dt class="col-4">{{ __('app.icon') }}:</dt>
@@ -132,6 +132,37 @@
                                                 </div>
                                             @endif
 
+                                        </div>
+                                        <div class="row">
+                                            @if (count($page->secondaryImages) > 0)
+                                                <div>
+                                                    <h5>
+                                                        {{ __('app.secondary_images') }}
+                                                    </h5>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table mb-0 text-center">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>{{ __('app.number') }}</th>
+                                                                <th>{{ __('app.image') }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($page->secondaryImages as $image)
+                                                                <tr>
+                                                                    <td>{{ $loop->iteration }}</td>
+                                                                    <td>
+                                                                        <img src="{{ asset('images/secondary_images/' . $image->image) }}"
+                                                                            class="img-fluid" alt="Image 1"
+                                                                            width="10%" />
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </section>

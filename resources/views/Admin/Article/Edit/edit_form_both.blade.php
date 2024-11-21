@@ -14,16 +14,16 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             <label>{{ __('app.description_en') }}</label>
-            <textarea rows="10" class="form-control" placeholder="{{ __('app.description_en') }}" name="description_en">{{ $article->description_en }}</textarea>
+            <textarea rows="10" class="form-control ckeditor" placeholder="{{ __('app.description_en') }}" name="description_en">{{ $article->description_en }}</textarea>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             <label>{{ __('app.description_ar') }}</label>
-            <textarea rows="10" class="form-control" placeholder="{{ __('app.description_ar') }}" name="description_ar">{{ $article->description_ar }}</textarea>
+            <textarea rows="10" class="form-control ckeditor" placeholder="{{ __('app.description_ar') }}" name="description_ar">{{ $article->description_ar }}</textarea>
         </div>
     </div>
     <div class="col-md-6">

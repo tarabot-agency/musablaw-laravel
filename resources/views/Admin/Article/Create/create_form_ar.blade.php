@@ -22,7 +22,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label>{{ __('app.description') }}</label>
-            <textarea rows="10" class="form-control" placeholder="{{ __('app.description') }}" name="description_ar">{{ old('description_ar') }}</textarea>
+            <textarea rows="10" class="form-control ckeditor" placeholder="{{ __('app.description') }}" name="description_ar">{{ old('description_ar') }}</textarea>
         </div>
     </div>
 </div>

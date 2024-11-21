@@ -79,21 +79,21 @@
                                                             <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_en ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.description') }}:</dt>
-                                                            <dd class="col-8">{{ $article->description_en ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $article->description_en ?? '---' !!}</dd>
                                                         @elseif ($website_language == 'ar')
                                                             <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_ar ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.description') }}:</dt>
-                                                            <dd class="col-8">{{ $article->description_ar ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $article->description_ar ?? '---' !!}</dd>
                                                         @else
                                                             <dt class="col-4">{{ __('app.title_en') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_en ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.title_ar') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_ar ?? '---' }}</dd>
                                                             <dt class="col-4">{{ __('app.description_en') }}:</dt>
-                                                            <dd class="col-8">{{ $article->description_en ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $article->description_en ?? '---' !!}</dd>
                                                             <dt class="col-4">{{ __('app.description_ar') }}:</dt>
-                                                            <dd class="col-8">{{ $article->description_ar ?? '---' }}</dd>
+                                                            <dd class="col-8">{!! $article->description_ar ?? '---' !!}</dd>
                                                         @endif
                                                     </div>
                                                     <hr />

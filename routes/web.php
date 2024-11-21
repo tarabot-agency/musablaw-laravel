@@ -29,7 +29,6 @@ Route::get('/optimize', function () {
     return 'optimized';
 });
 
-
 Route::get('switch-language/{lang}', [LanguageController::class, 'switchLang'])->name('switch-language');
 
 Route::group(['prefix' => 'admin'], function () {

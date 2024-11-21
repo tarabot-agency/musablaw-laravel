@@ -61,12 +61,7 @@
                                             @elseif ($website_lang == 'both')
                                                 @include('Admin.Article.Edit.edit_form_both')
                                             @endif
-                                            <div class="row">
-                                                <div class="col-12 d-flex justify-content-end mt-1">
-                                                    <button type="submit"
-                                                        class="btn btn-warning glow mb-1 mb-sm-0">{{ __('app.update') }}</button>
-                                                </div>
-                                            </div>
+                                      
                                             <!-- admins edit account form ends -->
                                         </div>
                                     </div>
@@ -150,6 +145,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{ asset('assets2/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets2/ckeditor/style.js') }}"></script>
     <script>
         // Counter to keep track of dynamically added sections
         let sectionCounter = parseInt('{{ count($article->subPages) }}');
