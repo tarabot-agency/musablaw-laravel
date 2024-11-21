@@ -95,6 +95,48 @@
                                             </main>
                                         </div>
                                         <div class="row">
+
+                                            @if (count($article->subPages) > 0)
+                                                @php
+                                                    $website_language = Setting('website_language');
+                                                @endphp
+                                                <h6>{{ __('app.sub_sections') }}</h6>
+                                                <div class="table-responsive">
+                                                    <table class="table mb-0 text-center">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>{{ __('app.number') }}</th>
+                                                                @if ($website_language == 'en')
+                                                                    <th>{{ __('app.content') }}</th>
+                                                                @elseif($website_language == 'ar')
+                                                                    <th>{{ __('app.content') }}</th>
+                                                                @else
+                                                                    <th>{{ __('app.content_en') }}</th>
+                                                                    <th>{{ __('app.content_ar') }}</th>
+                                                                @endif
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($article->subPages as $subpage)
+                                                                <tr>
+                                                                    <td>{{ $loop->iteration }}</td>
+                                                                    @if ($website_language == 'en')
+                                                                        <td>{{ $subpage->content_en ?? '---' }}</td>
+                                                                    @elseif($website_language == 'ar')
+                                                                        <td>{{ $subpage->content_ar ?? '---' }}</td>
+                                                                    @else
+                                                                        <td>{{ $subpage->content_en ?? '---' }}</td>
+                                                                        <td>{{ $subpage->content_ar ?? '---' }}</td>
+                                                                    @endif
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
+
+                                        </div>
+                                        <div class="row">
                                             @if (count($article->secondaryImages) > 0)
                                                 <div>
                                                     <h5>

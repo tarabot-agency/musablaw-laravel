@@ -104,68 +104,75 @@
         // Counter to keep track of dynamically added sections
         let sectionCounter = 0;
         let website_lang = "{{ $website_lang }}";
-        let new_setion_template = '';
-        if (website_lang == 'ar') {
-            new_setion_template = `
-        <div class="input-container">
-          <div class="row mb-3">
-            <div class="col-md-12">
-              <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
-              <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
-            </div>
-          </div>
 
-          <div class="text-end">
-            <button class="btn btn-outline-danger remove-btn" onclick="removeInputField(this)">
-              <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
-            </button>
-          </div>
-            <hr>
-        </div>`;
-        } else if (website_lang == 'en') {
-            new_setion_template = ` <div class="input-container">
-          <div class="row mb-3">
-            <div class="col-md-12">
-              <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
-              <textarea class="form-control" id="content_en_${sectionCounter}" name="supSections[${sectionCounter}][content_en]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
-            </div>
-          </div>
-
-          <div class="text-end">
-            <button class="btn btn-outline-danger remove-btn" onclick="removeInputField(this)">
-              <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
-            </button>
-          </div>
-            <hr>
-        </div>`;
-        } else {
-            new_setion_template = `
-        <div class="input-container">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content_en') }}</label>
-              <textarea class="form-control" id="content_en_${sectionCounter}" name="supSections[${sectionCounter}][content_en]" rows="3" placeholder="{{ __('app.content_en') }}"></textarea>
-            </div>
-            <div class="col-md-6">
-              <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content_ar') }}</label>
-              <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content_ar') }}"></textarea>
-            </div>
-          </div>
-
-          <div class="text-end">
-            <button class="btn btn-outline-danger remove-btn" onclick="removeInputField(this)">
-              <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
-            </button>
-          </div>
-            <hr>
-        </div>
-      `;
-        }
         // Function to add new section with input fields
         function addInputField() {
-            var newSection = new_setion_template;
-            $('#input-fields-container').append(newSection);
+            // Define the template inside the function so sectionCounter is updated each time
+            let new_setion_template = '';
+
+            if (website_lang == 'ar') {
+                new_setion_template = `
+                    <div class="input-container">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
+                                <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button class="btn btn-outline-danger remove-btn" onclick="removeInputField(this)">
+                                <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
+                            </button>
+                        </div>
+                        <hr>
+                    </div>`;
+            } else if (website_lang == 'en') {
+                new_setion_template = `
+                    <div class="input-container">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
+                                <textarea class="form-control" id="content_en_${sectionCounter}" name="supSections[${sectionCounter}][content_en]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button class="btn btn-outline-danger remove-btn" onclick="removeInputField(this)">
+                                <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
+                            </button>
+                        </div>
+                        <hr>
+                    </div>`;
+            } else {
+                new_setion_template = `
+                    <div class="input-container">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="content_en_${sectionCounter}" class="form-label">{{ __('app.content_en') }}</label>
+                                <textarea class="form-control" id="content_en_${sectionCounter}" name="supSections[${sectionCounter}][content_en]" rows="3" placeholder="{{ __('app.content_en') }}"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content_ar') }}</label>
+                                <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content_ar') }}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button class="btn btn-outline-danger remove-btn" onclick="removeInputField(this)">
+                                <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
+                            </button>
+                        </div>
+                        <hr>
+                    </div>`;
+            }
+
+            // Append the new section with updated sectionCounter
+            $('#input-fields-container').append(new_setion_template);
+
+            // Increment the counter after appending
             sectionCounter++;
+            console.log(sectionCounter)
         }
 
         function removeInputField(button) {

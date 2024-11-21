@@ -89,8 +89,8 @@ class ArticleController extends Controller
             if (isset($request->supSections)) {
                 foreach ($request->supSections as $sub_section) {
                     $article->subPages()->create([
-                        'content_en' => $sub_section['content_en'],
-                        'content_ar' => $sub_section['content_ar']
+                        'content_en' => $sub_section['content_en'] ?? null,
+                        'content_ar' => $sub_section['content_ar'] ?? null
                     ]);
                 }
             }
@@ -170,8 +170,8 @@ class ArticleController extends Controller
                 $article->subPages()->delete();
                 foreach ($request->supSections as $sub_section) {
                     $article->subPages()->create([
-                        'content_en' => $sub_section['content_en'],
-                        'content_ar' => $sub_section['content_ar']
+                        'content_en' => $sub_section['content_en'] ?? null,
+                        'content_ar' => $sub_section['content_ar'] ?? null
                     ]);
                 }
             }
