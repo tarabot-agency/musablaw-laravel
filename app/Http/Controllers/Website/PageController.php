@@ -46,7 +46,7 @@ class PageController extends Controller
                 'image'
             )
                 ->where('section', 'our_services')
-                ->take(5)
+                ->take(7)
                 ->get()->map(function ($page) {
                     $page->image = $page->image ? asset('images/pages/' . $page->image) : '';
                     return $page;
