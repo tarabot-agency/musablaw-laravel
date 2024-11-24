@@ -31,13 +31,13 @@ class GeneralSettingController extends Controller
                         "value" => $value,
                     ];
                 });
-            $settings['our_services'] = Page::select(
-                'id',
-                'title_' . $lang . ' as title',
-            )
-                ->where('section', 'our_services')
-                ->take(3)
-                ->get();
+            // $settings['our_services'] = Page::select(
+            //     'id',
+            //     'title_' . $lang . ' as title',
+            // )
+            //     ->where('section', 'our_services')
+            //     ->take(3)
+            //     ->get();
             return $this->returnData('settings', $settings);
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
