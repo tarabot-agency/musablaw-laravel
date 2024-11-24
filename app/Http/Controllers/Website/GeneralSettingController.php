@@ -12,7 +12,7 @@ class GeneralSettingController extends Controller
 {
     use GeneralTrait;
 
-    public function baseConfigurations(Request $request)
+    public function baseConfigurations()
     {
         try {
             $settings = Setting::get()
