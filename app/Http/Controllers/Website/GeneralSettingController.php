@@ -18,7 +18,7 @@ class GeneralSettingController extends Controller
             $lang = $request->header('lang');
             if (!$lang || ($lang != 'en' && $lang != 'ar'))
                 return $this->returnError('400', 'lang is required');
-            
+
             $settings = Setting::get()
                 ->map(function ($setting) {
                     $value = $setting->value;
@@ -31,18 +31,13 @@ class GeneralSettingController extends Controller
                         "value" => $value,
                     ];
                 });
-                $settings['our_services'] = Page::select(
-                    'id',
-                    'icon',
-                    'title_' . $lang . ' as title',
-                    'image'
-                )
-                    ->where('section', 'our_services')
-                    ->take(3)
-                    ->get()->map(function ($page) {
-                        $page->image = $page->image ? asset('images/pages/' . $page->image) : '';
-                        return $page;
-                    });
+            $settings['our_services'] = Page::select(
+                'id',
+                'title_' . $lang . ' as title',
+            )
+                ->where('section', 'our_services')
+                ->take(3)
+                ->get();
             return $this->returnData('settings', $settings);
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
