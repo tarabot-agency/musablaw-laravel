@@ -29,7 +29,7 @@ class GeneralSettingController extends Controller
                 });
             // $settings['our_services'] = Page::select(
             //     'id',
-            //     'title_' . $lang . ' as title',
+            //     'title_en as title',
             // )
             //     ->where('section', 'our_services')
             //     ->take(3)
