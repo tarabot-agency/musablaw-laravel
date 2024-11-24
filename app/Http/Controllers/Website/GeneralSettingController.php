@@ -15,10 +15,6 @@ class GeneralSettingController extends Controller
     public function baseConfigurations(Request $request)
     {
         try {
-            $lang = $request->header('lang');
-            if (!$lang || ($lang != 'en' && $lang != 'ar'))
-                return $this->returnError('400', 'lang is required');
-
             $settings = Setting::get()
                 ->map(function ($setting) {
                     $value = $setting->value;
