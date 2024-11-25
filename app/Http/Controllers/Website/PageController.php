@@ -233,7 +233,7 @@ class PageController extends Controller
         try {
             $lang = $request->header('lang');
             $partners = Partener::select('id', 'name', 'image')->get()->map(function ($partner) {
-                $partner->image = asset('images/partners/' . $partner->image);
+                $partner->image = asset('images/parteners/' . $partner->image);
                 return $partner;
             });
             return $this->returnData('data', $partners);
