@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use App\Models\Experience;
 use App\Models\Page;
 use App\Models\Partener;
 use App\Models\Project;
@@ -135,6 +136,15 @@ class PageController extends Controller
                     'id' => $certificate->id,
                     'image' => $image,
                     'name' => $certificate->name,
+                ];
+            });
+
+            $content['experiences'] =  Experience::get()->map(function ($experience) {
+                $image = $experience->image ? asset('images/experiences/' . $experience->image) : null;
+                return [
+                    'id' => $experience->id,
+                    'image' => $image,
+                    'name' => $experience->name,
                 ];
             });
             return $this->returnData('data', $content);

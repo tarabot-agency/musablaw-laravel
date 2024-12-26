@@ -302,4 +302,7 @@ return [
     'image_ar' => 'Image Ar',
     'partener' => 'Partener',
     'delete' => 'Delete',
+    'experiences' => 'Experiences',
+    'experience' => 'Experience',
+    'professional_career' => 'Professional Career',
 ];

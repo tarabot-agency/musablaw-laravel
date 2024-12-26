@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\OurServicesController;
 use App\Http\Controllers\Admin\PageController;
@@ -89,6 +90,11 @@ Route::group(
         Route::post('certificates/store', [CertificateController::class, 'store'])->name('certificate.store');
         Route::post('certificates/delete/{id}', [CertificateController::class, 'delete'])->name('certificate.delete');
 
+
+        Route::get('experiences', [ExperienceController::class, 'index'])->name('experiences.index');
+        Route::get('experiences/create', [ExperienceController::class, 'create'])->name('experience.create');
+        Route::post('experiences/store', [ExperienceController::class, 'store'])->name('experience.store');
+        Route::post('experiences/delete/{id}', [ExperienceController::class, 'delete'])->name('experience.delete');
 
         Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
         Route::get('article/{id}', [ArticleController::class, 'show'])->name('article.show');

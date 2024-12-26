@@ -81,6 +81,12 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
+        'experiences' => [
+            'driver' => 'local',
+            'root' => base_path() . '/public/images/experiences',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
         'articles' => [
             'driver' => 'local',
             'root' => base_path() . '/public/images/articles',

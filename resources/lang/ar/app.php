@@ -301,4 +301,7 @@ return [
     'image_ar' => 'الصورة باللغة العربية',
     'partener' => 'الشريك',
     'delete' => 'حذف',
+    'experiences' => 'الخبرات',
+    'experience' => 'خبرة',
+    'professional_career' => 'المسيرة المهنية',
  ];

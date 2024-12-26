@@ -59,9 +59,22 @@
                         </a>
                     </li>
 
+
+                    <li class="nav-item {{ Request::is('*/professional_career') ? 'active' : '' }}">
+                        <a href="{{ route('page.show', 'professional_career') }}">
+                            <span class="menu-title text-truncate">{{ __('app.professional_career') }}</span>
+                        </a>
+                    </li>
+
                     <li class="nav-item {{ Request::is('admin/certificate*') ? 'active' : '' }}">
                         <a href="{{ route('certificates.index') }}">
                             <span class="menu-title text-truncate">{{ __('app.certificates') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item {{ Request::is('admin/experience*') ? 'active' : '' }}">
+                        <a href="{{ route('experiences.index') }}">
+                            <span class="menu-title text-truncate">{{ __('app.experiences') }}</span>
                         </a>
                     </li>
 
