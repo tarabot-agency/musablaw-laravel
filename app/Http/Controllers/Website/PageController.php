@@ -41,7 +41,8 @@ class PageController extends Controller
 
                 $content['about_us_video'] = Page::select(
                     'id',
-                    'title_' . $lang . ' as title',
+                    'title_en as url',
+                    'title_ar as title',
                     'description_' . $lang . ' as description',
                     'image'
                 )
