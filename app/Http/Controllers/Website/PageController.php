@@ -38,6 +38,15 @@ class PageController extends Controller
             )
                 ->where('key', 'about_us')
                 ->first();
+
+                $content['about_us_video'] = Page::select(
+                    'id',
+                    'title_' . $lang . ' as title',
+                    'description_' . $lang . ' as description',
+                    'image'
+                )
+                    ->where('key', 'about_us_video')
+                    ->first();
             $content['about_us']->image = asset('images/pages/' . $content['about_us']->image);
 
             $content['our_services'] = Page::select(
