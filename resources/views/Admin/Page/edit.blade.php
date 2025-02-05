@@ -123,12 +123,12 @@
                                         @endif
                                     </div>
 
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="text-center">
                                             <button type="button" class="btn btn-dark add-btn" onclick="addInputField()">+
                                                 {{ __('app.add_sub_title') }}</button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-end mt-1">
                                             <button type="submit"
