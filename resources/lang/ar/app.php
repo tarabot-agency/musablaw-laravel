@@ -304,4 +304,11 @@ return [
     'experiences' => 'الخبرات',
     'experience' => 'خبرة',
     'professional_career' => 'المسيرة المهنية',
+    'slug' => 'Slug',
+    'show_at' => 'عرض في',
+    'meta_description' => 'Meta Description',
+    'add_tag' => 'Add Tag',
+    'tag' => 'Tag',
+    'meta_tags' => 'Meta Tags',
+    'preview' => 'معاينة',
  ];

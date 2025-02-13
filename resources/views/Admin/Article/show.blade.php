@@ -75,6 +75,10 @@
                                                         $website_language = Setting('website_language');
                                                     @endphp
                                                     <div class="row">
+                                                        <dt class="col-4">{{ __('app.slug') }}:</dt>
+                                                        <dd class="col-8">{{ $article->slug ?? '---' }}</dd>
+                                                        <dt class="col-4">{{ __('app.show_at') }}:</dt>
+                                                        <dd class="col-8">{{ $article->show_at ?? '---' }}</dd>
                                                         @if ($website_language == 'en')
                                                             <dt class="col-4">{{ __('app.title') }}:</dt>
                                                             <dd class="col-8">{{ $article->title_en ?? '---' }}</dd>
@@ -95,6 +99,8 @@
                                                             <dt class="col-4">{{ __('app.description_ar') }}:</dt>
                                                             <dd class="col-8">{!! $article->description_ar ?? '---' !!}</dd>
                                                         @endif
+                                                        <dt class="col-4">{{ __('app.meta_description') }}:</dt>
+                                                        <dd class="col-8">{{ $article->meta_description ?? '---' }}</dd>
                                                     </div>
                                                     <hr />
 
@@ -103,7 +109,7 @@
                                         <div class="row">
 
                                             @if (count($article->subPages) > 0)
-                                                <h6>{{ __('app.sub_sections') }}</h6>
+                                                <h6>{{ __('app.meta_tags') }}</h6>
                                                 <div class="table-responsive">
                                                     <table class="table mb-0 text-center">
                                                         <thead class="thead-dark">
@@ -112,7 +118,7 @@
                                                                 @if ($website_language == 'en')
                                                                     <th>{{ __('app.content') }}</th>
                                                                 @elseif($website_language == 'ar')
-                                                                    <th>{{ __('app.content') }}</th>
+                                                                    <th>{{ __('app.tag') }}</th>
                                                                 @else
                                                                     <th>{{ __('app.content_en') }}</th>
                                                                     <th>{{ __('app.content_ar') }}</th>

@@ -42,7 +42,7 @@
                     <!-- admins add start -->
                     <section class="admins-add">
                         <form action="{{ route('article.store') }}" method="POST" class="form-validate"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" id="form_data">
                             @csrf
                             <div class="card">
                                 <div class="card-body">
@@ -68,18 +68,21 @@
                                 <div class="card-body">
                                     <div id="input-fields-container">
                                         <div class="card-header">
-                                            <h5>{{ __('app.sub_sections') }}</h5>
+                                            <h5>{{ __('app.meta_tags') }}</h5>
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="text-center">
                                             <button type="button" class="btn btn-dark add-btn" onclick="addInputField()">+
-                                                {{ __('app.add_sub_title') }}</button>
+                                                {{ __('app.add_tag') }}</button>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-end mt-1">
+                                            <button type="button" id="article-preview"
+                                                class="btn btn-primary glow mb-1 mb-sm-0 mr-1">
+                                                {{ __('app.preview') }} </button>
                                             <button type="submit"
                                                 class="btn btn-warning glow mb-1 mb-sm-0">{{ __('app.add') }}</button>
                                         </div>
@@ -115,8 +118,8 @@
                     <div class="input-container">
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
-                                <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
+                                <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.tag') }}</label>
+                                <input type="text" class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" placeholder="{{ __('app.tag') }}" />
                             </div>
                         </div>
 
@@ -178,5 +181,32 @@
         function removeInputField(button) {
             $(button).closest('.input-container').remove();
         }
+        $('#article-preview').on('click', function() {
+            let title_ar = $('#title_ar').val();
+            let description_ar = $('#description_ar').val();
+            if (title_ar == '' || description_ar == '') {
+                alert('Please fill all fields')
+                return;
+            }
+            var editor = CKEDITOR.instances['description_ar'];
+            var descriptionValue = editor.getData();
+            description_ar = descriptionValue
+            var formData = new FormData(document.getElementById("form_data")); // Pass the actual DOM element
+            formData.append('description_ar', description_ar);
+            $.ajax({
+                url: "{{ route('article.preview') }}",
+                type: 'POST',
+                data: formData,
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Prevent jQuery from setting content-type
+                success: function(data) {
+                    window.open("https://alturkistanilaw.com/", '_blank');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // Handle errors
+                }
+            });
+
+        })
     </script>
 @endsection

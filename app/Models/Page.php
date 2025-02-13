@@ -14,7 +14,10 @@ class Page extends Model
         "description_en",
         "description_ar",
         "image",
-        "icon"
+        "icon",
+        "slug",
+        "show_at",
+        "meta_description"
     ];
 
     public function subPages()

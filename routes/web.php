@@ -103,6 +103,7 @@ Route::group(
         Route::get('articles/edit/{id}', [ArticleController::class, 'edit'])->name('article.edit');
         Route::post('articles/update/{id}', [ArticleController::class, 'update'])->name('article.update');
         Route::post('articles/delete/{id}', [ArticleController::class, 'delete'])->name('article.delete');
+        Route::post('preview-article', [ArticleController::class, 'previewArticle'])->name('article.preview');
 
         Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us.index');
         Route::get('contact-us/{id}', [ContactUsController::class, 'show'])->name('contact-us.show');

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->longText('description_ar')->nullable();
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
+            $table->string('slug')->nullable();
+            $table->timestamp('show_at')->nullable();
+            $table->string('meta_description')->nullable();
             $table->timestamps();
         });
     }

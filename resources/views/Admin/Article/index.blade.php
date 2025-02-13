@@ -64,6 +64,8 @@
                                                         <th>{{ __('app.title_en') }}</th>
                                                         <th>{{ __('app.title_ar') }}</th>
                                                     @endif
+                                                    <th>{{ __('app.slug') }}</th>
+                                                    <th>{{ __('app.show_at') }}</th>
                                                     <th>{{ __('app.actions') }}</th>
                                                 </tr>
                                             </thead>
@@ -79,6 +81,8 @@
                                                             <td>{{ $article->title_en }}</td>
                                                             <td>{{ $article->title_ar }}</td>
                                                         @endif
+                                                        <td>{{ $article->slug }}</td>
+                                                        <td>{{ $article->show_at ?? '---' }}</td>
                                                         <td>
 
                                                             <a href="{{ route('article.show', $article->id) }}"><i

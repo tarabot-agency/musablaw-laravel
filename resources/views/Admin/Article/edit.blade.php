@@ -61,7 +61,7 @@
                                             @elseif ($website_lang == 'both')
                                                 @include('Admin.Article.Edit.edit_form_both')
                                             @endif
-                                      
+
                                             <!-- admins edit account form ends -->
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                 <div class="card-body">
                                     <div id="input-fields-container">
                                         <div class="card-header">
-                                            <h5>{{ __('app.sub_sections') }}</h5>
+                                            <h5>{{ __('app.meta_tags') }}</h5>
                                         </div>
                                         <!-- First Section (default) -->
                                         @if (count($article->subPages) > 0)
@@ -81,9 +81,9 @@
                                                         @if ($website_lang == 'ar')
                                                             <div class="col-md-12">
                                                                 <label for="content_ar_{{ $index }}"
-                                                                    class="form-label">{{ __('app.content') }}</label>
-                                                                <textarea class="form-control" id="content_ar_{{ $index }}" name="supSections[{{ $index }}][content_ar]"
-                                                                    rows="3" placeholder="{{ __('app.content_') }}">{{ $subPage->content_ar }}</textarea>
+                                                                    class="form-label">{{ __('app.tag') }}</label>
+                                                                <input type="text" value="{{ $subPage->content_ar }}" class="form-control" id="content_ar_{{ $index }}" name="supSections[{{ $index }}][content_ar]"
+                                                                     placeholder="{{ __('app.tag') }}">
                                                             </div>
                                                         @elseif ($website_lang == 'en')
                                                             <div class="col-md-12">
@@ -123,7 +123,7 @@
                                     <div class="row">
                                         <div class="text-center">
                                             <button type="button" class="btn btn-dark add-btn" onclick="addInputField()">+
-                                                {{ __('app.add_sub_title') }}</button>
+                                                {{ __('app.add_tag') }}</button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -160,8 +160,8 @@
         <div class="input-container">
           <div class="row mb-3">
             <div class="col-md-12">
-              <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.content') }}</label>
-              <textarea class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" rows="3" placeholder="{{ __('app.content') }}"></textarea>
+              <label for="content_ar_${sectionCounter}" class="form-label">{{ __('app.tag') }}</label>
+              <input type="text" class="form-control" id="content_ar_${sectionCounter}" name="supSections[${sectionCounter}][content_ar]" placeholder="{{ __('app.tag') }}" />
             </div>
           </div>
 

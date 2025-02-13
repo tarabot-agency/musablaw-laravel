@@ -305,4 +305,11 @@ return [
     'experiences' => 'Experiences',
     'experience' => 'Experience',
     'professional_career' => 'Professional Career',
+    'slug' => 'Slug',
+    'show_at' => 'Show At',
+    'meta_description' => 'Meta Description',
+    'add_tag' => 'Add Tag',
+    'tag' => 'Tag',
+    'meta_tags' => 'Meta Tags',
+    'preview' => 'Preview',
 ];

@@ -39,15 +39,15 @@ class PageController extends Controller
                 ->where('key', 'about_us')
                 ->first();
 
-                $content['about_us_video'] = Page::select(
-                    'id',
-                    'title_en as url',
-                    'title_ar as title',
-                    'description_' . $lang . ' as description',
-                    'image'
-                )
-                    ->where('key', 'about_us_video')
-                    ->first();
+            $content['about_us_video'] = Page::select(
+                'id',
+                'title_en as url',
+                'title_ar as title',
+                'description_' . $lang . ' as description',
+                'image'
+            )
+                ->where('key', 'about_us_video')
+                ->first();
             $content['about_us']->image = asset('images/pages/' . $content['about_us']->image);
 
             $content['our_services'] = Page::select(
@@ -269,6 +269,7 @@ class PageController extends Controller
             if (!$lang || ($lang != 'en' && $lang != 'ar'))
                 return $this->returnError('400', 'lang is required');
             $articles = Page::where('section', 'article')
+                ->whereDate('show_at', '<=', now())
                 ->select('id', 'title_' . $lang . ' as title', 'image')
                 ->get()->map(function ($article) {
                     $article->image = asset('images/articles/' . $article->image);
@@ -279,4 +280,43 @@ class PageController extends Controller
             return $this->returnError($e->getCode(), $e->getMessage());
         }
     }
+
+    public function showArticle($slug)
+    {
+        try {
+            $lang = request()->header('lang');
+            if (!$lang || ($lang != 'en' && $lang != 'ar'))
+                return $this->returnError('400', 'lang is required');
+            $page = Page::select(
+                'id',
+                'slug',
+                'icon',
+                'section',
+                'title_' . $lang . ' as title',
+                'description_' . $lang . ' as description',
+                'image',
+                "meta_description"
+            )
+                ->where('slug', $slug)
+                ->first();
+            if (!$page)
+                return $this->returnError('404', 'page not found');
+
+            if (Route::currentRouteName() == 'service.show' && $page->section != 'our_services') {
+                return $this->returnError('404', 'page not found');
+            } elseif (Route::currentRouteName() == 'article.show' && $page->section != 'article') {
+                return $this->returnError('404', 'page not found');
+            }
+            // comment
+            $image_path_folder = 'pages';
+            if (Route::currentRouteName() == 'article.show' && $page->section == 'article') {
+                $image_path_folder = 'articles';
+            }
+            $page->image = $page->image ? asset('images/' . $image_path_folder . '/' . $page->image) : '';
+            return $this->returnData('data', $page);
+        } catch (\Exception $e) {
+            return $this->returnError($e->getCode(), $e->getMessage());
+        }
+    }
+
 }

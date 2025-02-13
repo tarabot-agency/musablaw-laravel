@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page;
+use App\Models\PagePreview;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,18 +50,27 @@ class ArticleController extends Controller
             $page_key = '';
             if ($website_lang == 'ar') {
                 $validator = Validator::make($request->all(), [
+                    'slug' => 'required|unique:pages,slug',
+                    'show_at' => 'required',
+                    'meta_description' => 'required',
                     'title_ar' => 'required',
                     'description_ar' => 'required',
                 ]);
                 $page_key = rand(100000, 999999);
             } elseif ($website_lang == 'en') {
                 $validator = Validator::make($request->all(), [
+                    'slug' => 'required|unique:pages,slug',
+                    'show_at' => 'required',
+                    'meta_description' => 'required',
                     'title_en' => 'required',
                     'description_en' => 'required',
                 ]);
                 $page_key = create_page_key($request->title_en);
             } else {
                 $validator = Validator::make($request->all(), [
+                    'slug' => 'required|unique:pages,slug',
+                    'show_at' => 'required',
+                    'meta_description' => 'required',
                     'title_ar' => 'required',
                     'title_en' => 'required',
                     'description_ar' => 'required',
@@ -77,10 +87,13 @@ class ArticleController extends Controller
             $article = new Page();
             $article->section = 'article';
             $article->key = $page_key;
+            $article->slug = $request->slug;
+            $article->meta_description = $request->meta_description;
             $article->title_en = $request->title_en;
             $article->title_ar = $request->title_ar;
             $article->description_en = $request->description_en;
             $article->description_ar = $request->description_ar;
+            $article->show_at = $request->show_at;
             if ($request->hasFile('image')) {
                 $image = $this->saveImage($request->image, 'articles');
                 $article->image = $image;
@@ -132,16 +145,25 @@ class ArticleController extends Controller
             $website_lang = Setting('website_language');
             if ($website_lang == 'ar') {
                 $validator = Validator::make($request->all(), [
+                    'slug' => 'required',
+                    'show_at' => 'required',
+                    'meta_description' => 'required',
                     'title_ar' => 'required',
                     'description_ar' => 'required',
                 ]);
             } elseif ($website_lang == 'en') {
                 $validator = Validator::make($request->all(), [
+                    'slug' => 'required',
+                    'show_at' => 'required',
+                    'meta_description' => 'required',
                     'title_en' => 'required',
                     'description_en' => 'required',
                 ]);
             } else {
                 $validator = Validator::make($request->all(), [
+                    'slug' => 'required',
+                    'show_at' => 'required',
+                    'meta_description' => 'required',
                     'title_ar' => 'required',
                     'title_en' => 'required',
                     'description_ar' => 'required',
@@ -155,6 +177,9 @@ class ArticleController extends Controller
             }
             DB::beginTransaction();
             $article->update([
+                'slug' => $request->slug ?? $article->slug,
+                'meta_description' => $request->meta_description ?? $article->meta_description,
+                'show_at' => $request->show_at ?? $article->show_at,
                 'title_ar' => $request->title_ar ?? $article->title_ar,
                 'title_en' => $request->title_en ?? $article->title_en,
                 'description_ar' => $request->description_ar ?? $article->description_ar,
@@ -218,6 +243,45 @@ class ArticleController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return view('general-error');
+        }
+    }
+
+
+    public function previewArticle(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'title_ar' => 'required',
+                'description_ar' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->returnError('422', $validator->errors());
+            }
+            DB::beginTransaction();
+            PagePreview::truncate();
+            $article = new PagePreview();
+            $article->title = $request->title_ar;
+            $article->description = $request->description_ar;
+            if ($request->hasFile('image')) {
+                $image = $this->saveImage($request->image, 'articles');
+                $article->image = $image;
+            }
+            $article->save();
+            if (isset($request->secondary_images)) {
+                foreach ($request->secondary_images as $secondary_image) {
+                    $image = $this->saveImage($secondary_image, 'secondary_images');
+                    $article->secondaryImages()->create([
+                        'image' => $image
+                    ]);
+                }
+            }
+            DB::commit();
+            // return to the frontend design page (ANGULAR)
+            return response()->json(['status' => 'success', 'message' => 'Article previewed successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->returnError('500', $e->getMessage());
         }
     }
 }
