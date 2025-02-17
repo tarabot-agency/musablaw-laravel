@@ -268,9 +268,9 @@ class PageController extends Controller
             $lang = request()->header('lang');
             if (!$lang || ($lang != 'en' && $lang != 'ar'))
                 return $this->returnError('400', 'lang is required');
-            $articles = Page::where('section', 'article')
+            $articles = Page::with('subPages')->where('section', 'article')
                 ->whereDate('show_at', '<=', now())
-                ->select('id', 'title_' . $lang . ' as title', 'image')
+                ->select('id', 'title_' . $lang . ' as title', 'image', 'meta_description', 'slug', 'show_at', '')
                 ->get()->map(function ($article) {
                     $article->image = asset('images/articles/' . $article->image);
                     return $article;
