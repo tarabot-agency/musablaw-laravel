@@ -312,4 +312,5 @@ return [
     'tag' => 'Tag',
     'meta_tags' => 'Meta Tags',
     'preview' => 'Preview',
+    'meta_title' => 'Meta Title',
 ];

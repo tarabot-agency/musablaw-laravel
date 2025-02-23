@@ -54,6 +54,7 @@ class ArticleController extends Controller
                     'show_at' => 'required',
                     'meta_description' => 'required',
                     'title_ar' => 'required',
+                    'meta_title' => 'required',
                     'description_ar' => 'required',
                 ]);
                 $page_key = rand(100000, 999999);
@@ -64,6 +65,7 @@ class ArticleController extends Controller
                     'meta_description' => 'required',
                     'title_en' => 'required',
                     'description_en' => 'required',
+                    'meta_title' => 'required',
                 ]);
                 $page_key = create_page_key($request->title_en);
             } else {
@@ -75,6 +77,7 @@ class ArticleController extends Controller
                     'title_en' => 'required',
                     'description_ar' => 'required',
                     'description_en' => 'required',
+                    'meta_title' => 'required',
                 ]);
                 $page_key = create_page_key($request->title_en);
             }
@@ -91,6 +94,7 @@ class ArticleController extends Controller
             $article->meta_description = $request->meta_description;
             $article->title_en = $request->title_en;
             $article->title_ar = $request->title_ar;
+            $article->meta_title = $request->meta_title;
             $article->description_en = $request->description_en;
             $article->description_ar = $request->description_ar;
             $article->show_at = $request->show_at;
@@ -150,6 +154,7 @@ class ArticleController extends Controller
                     'meta_description' => 'required',
                     'title_ar' => 'required',
                     'description_ar' => 'required',
+                    'meta_title' => 'required',
                 ]);
             } elseif ($website_lang == 'en') {
                 $validator = Validator::make($request->all(), [
@@ -158,6 +163,7 @@ class ArticleController extends Controller
                     'meta_description' => 'required',
                     'title_en' => 'required',
                     'description_en' => 'required',
+                    'meta_title' => 'required',
                 ]);
             } else {
                 $validator = Validator::make($request->all(), [
@@ -168,6 +174,7 @@ class ArticleController extends Controller
                     'title_en' => 'required',
                     'description_ar' => 'required',
                     'description_en' => 'required',
+                    'meta_title' => 'required',
                 ]);
             }
             if ($validator->fails()) {
@@ -182,6 +189,7 @@ class ArticleController extends Controller
                 'show_at' => $request->show_at ?? $article->show_at,
                 'title_ar' => $request->title_ar ?? $article->title_ar,
                 'title_en' => $request->title_en ?? $article->title_en,
+                'meta_title' => $request->meta_title ?? $article->meta_title,
                 'description_ar' => $request->description_ar ?? $article->description_ar,
                 'description_en' => $request->description_en ?? $article->description_en
             ]);

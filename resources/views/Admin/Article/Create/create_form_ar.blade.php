@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label>{{ __('app.title') }}</label>
             <input type="text" class="form-control"
@@ -7,7 +7,15 @@
                 name="title_ar" id="title_ar" required>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>{{ __('app.meta_title') }}</label>
+            <input type="text" class="form-control"
+                placeholder="{{ __('app.meta_title') }}" value="{{ old('meta_title') }}"
+                name="meta_title" id="meta_title" required>
+        </div>
+    </div>
+    <div class="col-md-4">
         <div class="form-group">
             <label>{{ __('app.slug') }}</label>
             <input type="text" class="form-control"
@@ -15,7 +23,7 @@
                 name="slug" required>
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
         <div class="form-group">
             <label>{{ __('app.show_at') }}</label>
             <input type="datetime-local" class="form-control"
@@ -23,13 +31,13 @@
                 name="show_at" required>
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
         <div class="form-group">
             <label>{{ __('app.base_image') }}</label>
             <input type="file" class="form-control" name="image" id="image">
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
         <div class="form-group">
             <label>{{ __('app.secondary_images') }}</label>
             <input type="file" class="form-control" name="secondary_images[]" multiple>

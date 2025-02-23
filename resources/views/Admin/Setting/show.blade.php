@@ -45,6 +45,9 @@
                                         <!-- table head dark -->
                                         <div class="row">
                                             @foreach ($settings as $setting)
+                                                @if ($setting->key == 'website_language')
+                                                    @continue
+                                                @endif
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ $setting->title }} / {{ $setting->unit }}</label>

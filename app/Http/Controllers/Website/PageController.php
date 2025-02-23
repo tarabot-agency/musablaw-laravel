@@ -270,7 +270,7 @@ class PageController extends Controller
                 return $this->returnError('400', 'lang is required');
             $articles = Page::with(['subPages'])->where('section', 'article')
                 ->whereDate('show_at', '<=', now())
-                ->select('id', 'title_' . $lang . ' as title', 'image', 'meta_description', 'slug', 'show_at')
+                ->select('id', 'title_' . $lang . ' as title', 'image', 'meta_title' ,'meta_description', 'slug', 'show_at')
                 ->get()->map(function ($article) use ($lang) {
                     $article->subPages->map(function ($tag) use ($lang) {
                         $tag->content = $tag['content_' . $lang];
@@ -300,7 +300,8 @@ class PageController extends Controller
                 'title_' . $lang . ' as title',
                 'description_' . $lang . ' as description',
                 'image',
-                "meta_description"
+                "meta_description",
+                "meta_title"
             )
                 ->where('slug', $slug)
                 ->first();

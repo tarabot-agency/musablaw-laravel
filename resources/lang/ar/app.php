@@ -311,4 +311,5 @@ return [
     'tag' => 'Tag',
     'meta_tags' => 'Meta Tags',
     'preview' => 'معاينة',
+    'meta_title' => 'Meta Title',
  ];

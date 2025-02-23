@@ -101,6 +101,8 @@
                                                         @endif
                                                         <dt class="col-4">{{ __('app.meta_description') }}:</dt>
                                                         <dd class="col-8">{{ $article->meta_description ?? '---' }}</dd>
+                                                        <dt class="col-4">{{ __('app.meta_title') }}:</dt>
+                                                        <dd class="col-8">{{ $article->meta_title ?? '---' }}</dd>
                                                     </div>
                                                     <hr />
 
