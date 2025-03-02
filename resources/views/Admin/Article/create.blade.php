@@ -62,15 +62,15 @@
                                             @php
                                                 $website_lang = Setting('website_language');
                                             @endphp
-                                                @include('Admin.Article.Create.create_form_ar')
+                                                {{-- @include('Admin.Article.Create.create_form_ar') --}}
 
-                                            {{-- @if ($website_lang == 'ar')
+                                            @if ($website_lang == 'ar')
                                                 @include('Admin.Article.Create.create_form_ar')
                                             @elseif ($website_lang == 'en')
                                                 @include('Admin.Article.Create.create_form_en')
                                             @elseif ($website_lang == 'both')
                                                 @include('Admin.Article.Create.create_form_both')
-                                            @endif --}}
+                                            @endif
                                             <!-- admins add account form ends -->
                                         </div>
                                     </div>
