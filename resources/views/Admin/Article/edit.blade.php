@@ -14,6 +14,16 @@
         .remove-btn:hover {
             color: #bb2d3b;
         }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .ck-editor__editable_inline {
+            min-height: 200px;
+        }
     </style>
 @endsection
 @section('content')
@@ -54,6 +64,8 @@
                                             @php
                                                 $website_lang = Setting('website_language');
                                             @endphp
+                                                {{-- @include('Admin.Article.Edit.edit_form_ar') --}}
+
                                             @if ($website_lang == 'ar')
                                                 @include('Admin.Article.Edit.edit_form_ar')
                                             @elseif ($website_lang == 'en')
@@ -145,8 +157,20 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('assets2/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('assets2/ckeditor/style.js') }}"></script>
+    {{-- <script src="{{ asset('assets2/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets2/ckeditor/style.js') }}"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description_ar'), {
+                ckfinder: {
+                    uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+                },
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
     <script>
         // Counter to keep track of dynamically added sections
         let sectionCounter = parseInt('{{ count($article->subPages) }}');

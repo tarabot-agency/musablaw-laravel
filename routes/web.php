@@ -110,3 +110,4 @@ Route::group(
         Route::post('contact-us/delete/{id}', [ContactUsController::class, 'delete'])->name('contact-us.delete');
     }
 );
+Route::post('/upload', [ArticleController::class, 'upload'])->name('ckeditor.upload');
