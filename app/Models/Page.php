@@ -26,6 +26,11 @@ class Page extends Model
         return $this->hasMany(SubPage::class);
     }
 
+    public function subArticles()
+    {
+        return $this->hasMany(SubArticle::class, 'article_id');
+    }
+
     public function secondaryImages()
     {
         return $this->hasMany(PageSecondaryImage::class);

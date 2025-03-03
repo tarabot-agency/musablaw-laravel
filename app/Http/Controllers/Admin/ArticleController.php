@@ -82,7 +82,7 @@ class ArticleController extends Controller
                 $page_key = create_page_key($request->title_en);
             }
             if ($validator->fails()) {
-                Session::flash('message',  $validator->errors()->first());
+                Session::flash('message', $validator->errors()->first());
                 Session::flash('alert-class', 'alert-danger');
                 return redirect()->back()->withInput();
             }
@@ -111,6 +111,18 @@ class ArticleController extends Controller
                     ]);
                 }
             }
+            if (isset($request->subArticles)) {
+                foreach ($request->subArticles as $sub_article) {
+                    $image = isset($sub_article['image']) ? $this->saveImage($sub_article['image'], 'articles') : '';
+                    $article->subArticles()->create([
+                        'article_id' => $article->id,
+                        'title' => $sub_article['title'],
+                        'sub_title' => $sub_article['sub_title'],
+                        'description_ar' => $sub_article['description_ar'] ?? null,
+                        'image' => $image,
+                    ]);
+                }
+            }
             if (isset($request->secondary_images)) {
                 foreach ($request->secondary_images as $secondary_image) {
                     $image = $this->saveImage($secondary_image, 'secondary_images');
@@ -132,7 +144,7 @@ class ArticleController extends Controller
 
     public function edit($id)
     {
-        $article =  Page::where('section', 'article')->where('id', $id)->first();
+        $article = Page::where('section', 'article')->where('id', $id)->first();
         if (!$article) {
             return view('general-error');
         }
@@ -142,7 +154,7 @@ class ArticleController extends Controller
     public function update($id, Request $request)
     {
         try {
-            $article =  Page::where('section', 'article')->where('id', $id)->first();
+            $article = Page::where('section', 'article')->where('id', $id)->first();
             if (!$article) {
                 return view('general-error');
             }
@@ -178,7 +190,7 @@ class ArticleController extends Controller
                 ]);
             }
             if ($validator->fails()) {
-                Session::flash('message',  $validator->errors()->first());
+                Session::flash('message', $validator->errors()->first());
                 Session::flash('alert-class', 'alert-danger');
                 return redirect()->back()->withInput();
             }
@@ -208,6 +220,20 @@ class ArticleController extends Controller
                     ]);
                 }
             }
+
+            if (isset($request->subArticles)) {
+                $article->subArticles()->delete();
+                foreach ($request->subArticles as $sub_article) {
+                    $image = isset($sub_article['image']) ? $this->saveImage($sub_article['image'], 'articles') : '';
+                    $article->subArticles()->create([
+                        'article_id' => $article->id,
+                        'title' => $sub_article['title'],
+                        'sub_title' => $sub_article['sub_title'],
+                        'description_ar' => $sub_article['description_ar'] ?? null,
+                        'image' => $image,
+                    ]);
+                }
+            }
             if (isset($request->secondary_images)) {
                 $article->secondaryImages()->delete();
                 foreach ($request->secondary_images as $secondary_image) {
@@ -231,9 +257,9 @@ class ArticleController extends Controller
     {
         try {
             DB::beginTransaction();
-            $article =  Page::where('section', 'article')->where('id', $id)->first();
+            $article = Page::where('section', 'article')->where('id', $id)->first();
             if (!$article) {
-                Session::flash('message', __('app.article') . '' .  __('app.is_not_exist'));
+                Session::flash('message', __('app.article') . '' . __('app.is_not_exist'));
                 Session::flash('alert-class', 'alert-danger');
                 return redirect()->route('article.index');
             }
@@ -296,13 +322,13 @@ class ArticleController extends Controller
     public function upload(Request $request)
     {
         if ($request->hasFile('upload')) {
-        $originName = $request->file('upload')->getClientOriginalName();
-        $fileName = pathinfo($originName, PATHINFO_FILENAME);
-        $extension = $request->file('upload')->getClientOriginalExtension();
-        $fileName = $fileName . '_' . time() . '.' . $extension;
-        $request->file('upload')->move(public_path('media'), $fileName);
-        $url = asset('media/' . $fileName);
-        return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+            $request->file('upload')->move(public_path('media'), $fileName);
+            $url = asset('media/' . $fileName);
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
     }
 }

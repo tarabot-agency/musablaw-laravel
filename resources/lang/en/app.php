@@ -313,4 +313,7 @@ return [
     'meta_tags' => 'Meta Tags',
     'preview' => 'Preview',
     'meta_title' => 'Meta Title',
+    'sub_articles' => 'Sub Articles',
+    'add_sub_article' => 'Add Sub Article',
+    'sub_title' => 'Sub Title',
 ];

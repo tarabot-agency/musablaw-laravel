@@ -312,4 +312,7 @@ return [
     'meta_tags' => 'Meta Tags',
     'preview' => 'معاينة',
     'meta_title' => 'Meta Title',
+    'sub_articles' => 'المقالات الفرعية',
+    'add_sub_article' => 'إضافة مقال فرعي',
+    'sub_title' => 'العنوان الفرعي',
  ];

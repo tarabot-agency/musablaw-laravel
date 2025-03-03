@@ -14,6 +14,7 @@
         .remove-btn:hover {
             color: #bb2d3b;
         }
+
         textarea {
             width: 100%;
             padding: 10px;
@@ -21,6 +22,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .ck-editor__editable_inline {
             min-height: 200px;
         }
@@ -64,15 +66,15 @@
                                             @php
                                                 $website_lang = Setting('website_language');
                                             @endphp
-                                                {{-- @include('Admin.Article.Edit.edit_form_ar') --}}
+                                            @include('Admin.Article.Edit.edit_form_ar')
 
-                                            @if ($website_lang == 'ar')
+                                            {{-- @if ($website_lang == 'ar')
                                                 @include('Admin.Article.Edit.edit_form_ar')
                                             @elseif ($website_lang == 'en')
                                                 @include('Admin.Article.Edit.edit_form_en')
                                             @elseif ($website_lang == 'both')
                                                 @include('Admin.Article.Edit.edit_form_both')
-                                            @endif
+                                            @endif --}}
 
                                             <!-- admins edit account form ends -->
                                         </div>
@@ -94,8 +96,11 @@
                                                             <div class="col-md-12">
                                                                 <label for="content_ar_{{ $index }}"
                                                                     class="form-label">{{ __('app.tag') }}</label>
-                                                                <input type="text" value="{{ $subPage->content_ar }}" class="form-control" id="content_ar_{{ $index }}" name="supSections[{{ $index }}][content_ar]"
-                                                                     placeholder="{{ __('app.tag') }}">
+                                                                <input type="text" value="{{ $subPage->content_ar }}"
+                                                                    class="form-control"
+                                                                    id="content_ar_{{ $index }}"
+                                                                    name="supSections[{{ $index }}][content_ar]"
+                                                                    placeholder="{{ __('app.tag') }}">
                                                             </div>
                                                         @elseif ($website_lang == 'en')
                                                             <div class="col-md-12">
@@ -138,6 +143,83 @@
                                                 {{ __('app.add_tag') }}</button>
                                         </div>
                                     </div>
+                                    {{-- <div class="row">
+                                        <div class="col-12 d-flex justify-content-end mt-1">
+                                            <button type="submit"
+                                                class="btn btn-warning glow mb-1 mb-sm-0">{{ __('app.update') }}</button>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="sub-articles-container">
+                                        <div class="card-header">
+                                            <h5>{{ __('app.sub_articles') }}</h5>
+                                        </div>
+                                    </div>
+                                    @if (count($article->subArticles) > 0)
+                                        @foreach ($article->subArticles as $index => $subArticle)
+                                            <div class="input-container-data p-2">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-4">
+                                                        <label for="sub_article_title_{{ $index }}"
+                                                            class="form-label">{{ __('app.title') }}</label>
+                                                        <input type="text" class="form-control"
+                                                            id="sub_article_title_{{ $index }}"
+                                                            name="subArticles[{{ $index }}][title]"
+                                                            value="{{ $subArticle->title }}"
+                                                            placeholder="{{ __('app.title') }}"  />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="sub_article_sub_title_{{ $index }}"
+                                                            class="form-label">{{ __('app.sub_title') }}</label>
+                                                        <input type="text" class="form-control"
+                                                            id="sub_article_sub_title_{{ $index }}"
+                                                            name="subArticles[{{ $index }}][sub_title]"
+                                                            value="{{ $subArticle->sub_title }}"
+                                                            placeholder="{{ __('app.sub_title') }}"  />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="sub_article_image_{{ $index }}"
+                                                            class="form-label">{{ __('app.image') }}</label>
+                                                        <input type="file" class="form-control"
+                                                            id="sub_article_image_{{ $index }}"
+                                                            name="subArticles[{{ $index }}][image]" />
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <label for="sub_article_description_ar_{{ $index }}"
+                                                            class="form-label">{{ __('app.description_ar') }}</label>
+                                                        <textarea class="form-control ckeditor" id="sub_article_description_ar_{{ $index }}"
+                                                            name="subArticles[{{ $index }}][description_ar]" rows="5"
+                                                            placeholder="{{ __('app.description_ar') }}">{{ $subArticle->description_ar }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="text-end">
+                                                    <button type="button" class="btn btn-outline-danger remove-btn"
+                                                        onclick="removeSubArticleField(this)">
+                                                        <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
+                                                    </button>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                </div>
+                                @endforeach
+                                @endif
+
+
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-dark add-btn"
+                                                onclick="addSubArticleField()">+
+                                                {{ __('app.add_sub_article') }}</button>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-end mt-1">
                                             <button type="submit"
@@ -146,21 +228,22 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </section>
-                    <!-- admins edit ends -->
                 </div>
+                </form>
                 </section>
                 <!-- admins edit ends -->
             </div>
+            </section>
+            <!-- admins edit ends -->
         </div>
+    </div>
     </div>
 @endsection
 @section('script')
-    {{-- <script src="{{ asset('assets2/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('assets2/ckeditor/style.js') }}"></script> --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-    <script>
+    <script src="{{ asset('assets2/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets2/ckeditor/style.js') }}"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script> --}}
+    {{-- <script>
         ClassicEditor
             .create(document.querySelector('#description_ar'), {
                 ckfinder: {
@@ -170,8 +253,53 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
+    </script> --}}
     <script>
+        let subArticleCounter = parseInt('{{ count($article->subArticles) }}');
+
+        function addSubArticleField() {
+            let newSubArticleTemplate = `
+        <div class="input-container-data">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="sub_article_title_${subArticleCounter}" class="form-label">{{ __('app.title') }}</label>
+                    <input type="text" class="form-control" id="sub_article_title_${subArticleCounter}" name="subArticles[${subArticleCounter}][title]" placeholder="{{ __('app.title') }}"  />
+                </div>
+                <div class="col-md-4">
+                    <label for="sub_article_sub_title_${subArticleCounter}" class="form-label">{{ __('app.sub_title') }}</label>
+                    <input type="text" class="form-control" id="sub_article_sub_title_${subArticleCounter}" name="subArticles[${subArticleCounter}][sub_title]" placeholder="{{ __('app.sub_title') }}" />
+                </div>
+                <div class="col-md-4">
+                    <label for="sub_article_image_${subArticleCounter}" class="form-label">{{ __('app.image') }}</label>
+                    <input type="file" class="form-control" id="sub_article_image_${subArticleCounter}" name="subArticles[${subArticleCounter}][image]" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="sub_article_description_ar_${subArticleCounter}" class="form-label">{{ __('app.description_ar') }}</label>
+                    <textarea class="form-control" id="sub_article_description_ar_${subArticleCounter}" name="subArticles[${subArticleCounter}][description_ar]" rows="5" placeholder="{{ __('app.description_ar') }}"></textarea>
+                </div>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-outline-danger remove-btn" onclick="removeSubArticleField(this)">
+                    <i class="bi bi-x-circle"></i> {{ __('app.remove') }}
+                </button>
+            </div>
+            <hr>
+        </div>
+    `;
+            $('#sub-articles-container').append(newSubArticleTemplate);
+
+            // Initialize CKEditor for the new sub-article description field
+            CKEDITOR.replace(`sub_article_description_ar_${subArticleCounter}`);
+
+            subArticleCounter++;
+        }
+
+        // Function to remove Sub-Article Field
+        function removeSubArticleField(button) {
+            $(button).closest('.input-container-data').remove();
+        }
         // Counter to keep track of dynamically added sections
         let sectionCounter = parseInt('{{ count($article->subPages) }}');
         let website_lang = "{{ $website_lang }}";
