@@ -314,7 +314,7 @@ class PageController extends Controller
                 return $this->returnError('404', 'page not found');
             }
             $page->subArticles->map(function ($article) {
-                $article->image = asset('images/articles/' . $article->image);
+                $article->image = $article->image ?  asset('images/articles/' . $article->image) : '';
                 return $article;
             });
             // comment
