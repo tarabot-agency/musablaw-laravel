@@ -292,7 +292,7 @@ class PageController extends Controller
             $lang = request()->header('lang');
             if (!$lang || ($lang != 'en' && $lang != 'ar'))
                 return $this->returnError('400', 'lang is required');
-            $page = Page::select(
+            $page = Page::with('subArticles')->select(
                 'id',
                 'slug',
                 'icon',
@@ -313,6 +313,10 @@ class PageController extends Controller
             } elseif (Route::currentRouteName() == 'article.show' && $page->section != 'article') {
                 return $this->returnError('404', 'page not found');
             }
+            $page->subArticles->map(function ($article) {
+                $article->image = asset('images/articles/' . $article->image);
+                return $article;
+            });
             // comment
             $image_path_folder = 'pages';
             if (Route::currentRouteName() == 'article.show' && $page->section == 'article') {
