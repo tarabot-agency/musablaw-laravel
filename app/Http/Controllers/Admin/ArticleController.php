@@ -222,16 +222,35 @@ class ArticleController extends Controller
             }
 
             if (isset($request->subArticles)) {
-                $article->subArticles()->delete();
                 foreach ($request->subArticles as $sub_article) {
-                    $image = isset($sub_article['image']) ? $this->saveImage($sub_article['image'], 'articles') : '';
-                    $article->subArticles()->create([
-                        'article_id' => $article->id,
-                        'title' => $sub_article['title'],
-                        'sub_title' => $sub_article['sub_title'],
-                        'description_ar' => $sub_article['description_ar'] ?? null,
-                        'image' => $image,
-                    ]);
+                    $sub_article_id = isset($sub_article['id']) && $sub_article['id'] > 0 ? $sub_article['id'] : null;
+
+                    if ($sub_article_id) {
+
+                        $sub_article_db = $article->subArticles()->where('id', $sub_article_id)->first();
+                        if ($sub_article_db) {
+                            $sub_article_db->update([
+                                'title' => $sub_article['title'],
+                                'sub_title' => $sub_article['sub_title'],
+                                'description_ar' => $sub_article['description_ar'] ?? null,
+                            ]);
+                            if (isset($sub_article['image'])) {
+                                $image = $this->saveImage($sub_article['image'], 'articles');
+                                $sub_article_db->update([
+                                    'image' => $image
+                                ]);
+                            }
+                        }
+                    } else {
+                        $image = isset($sub_article['image']) ? $this->saveImage($sub_article['image'], 'articles') : '';
+                        $article->subArticles()->create([
+                            'article_id' => $article->id,
+                            'title' => $sub_article['title'],
+                            'sub_title' => $sub_article['sub_title'],
+                            'description_ar' => $sub_article['description_ar'] ?? null,
+                            'image' => $image,
+                        ]);
+                    }
                 }
             }
             if (isset($request->secondary_images)) {

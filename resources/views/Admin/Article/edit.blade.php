@@ -160,6 +160,8 @@
                                     </div>
                                     @if (count($article->subArticles) > 0)
                                         @foreach ($article->subArticles as $index => $subArticle)
+                                            <input type="hidden" name="subArticles[{{ $index }}][id]"
+                                                value="{{ $subArticle->id }}" />
                                             <div class="input-container-data p-2">
                                                 <div class="row mb-3">
                                                     <div class="col-md-4">
@@ -169,7 +171,7 @@
                                                             id="sub_article_title_{{ $index }}"
                                                             name="subArticles[{{ $index }}][title]"
                                                             value="{{ $subArticle->title }}"
-                                                            placeholder="{{ __('app.title') }}"  />
+                                                            placeholder="{{ __('app.title') }}" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="sub_article_sub_title_{{ $index }}"
@@ -178,7 +180,7 @@
                                                             id="sub_article_sub_title_{{ $index }}"
                                                             name="subArticles[{{ $index }}][sub_title]"
                                                             value="{{ $subArticle->sub_title }}"
-                                                            placeholder="{{ __('app.sub_title') }}"  />
+                                                            placeholder="{{ __('app.sub_title') }}" />
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="sub_article_image_{{ $index }}"
@@ -205,38 +207,37 @@
                                                 </div>
                                                 <hr>
                                             </div>
-                                </div>
-                                @endforeach
-                                @endif
+                                        @endforeach
+                                    @endif
 
 
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-dark add-btn"
-                                                onclick="addSubArticleField()">+
-                                                {{ __('app.add_sub_article') }}</button>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-dark add-btn"
+                                                    onclick="addSubArticleField()">+
+                                                    {{ __('app.add_sub_article') }}</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-end mt-1">
-                                            <button type="submit"
-                                                class="btn btn-warning glow mb-1 mb-sm-0">{{ __('app.update') }}</button>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-end mt-1">
+                                                <button type="submit"
+                                                    class="btn btn-warning glow mb-1 mb-sm-0">{{ __('app.update') }}</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </section>
+                    <!-- admins edit ends -->
                 </div>
-                </form>
                 </section>
                 <!-- admins edit ends -->
             </div>
-            </section>
-            <!-- admins edit ends -->
         </div>
-    </div>
     </div>
 @endsection
 @section('script')
@@ -260,6 +261,7 @@
         function addSubArticleField() {
             let newSubArticleTemplate = `
         <div class="input-container-data">
+                        <input type="hidden" name="subArticles[${subArticleCounter}][id]" value="0">
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="sub_article_title_${subArticleCounter}" class="form-label">{{ __('app.title') }}</label>
